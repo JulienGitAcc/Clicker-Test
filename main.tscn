@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cao2geyaqj07i"]
+[gd_scene load_steps=7 format=3 uid="uid://cao2geyaqj07i"]
 
 [ext_resource type="Script" uid="uid://digh176gqehm6" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://cgmv1a3pgrnw0" path="res://assets/hit marker.png" id="2_0xm2m"]
 
 [sub_resource type="Animation" id="Animation_0xm2m"]
 length = 0.001
@@ -63,6 +64,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ig7tw")
+
+[node name="HitMarker" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_0xm2m")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
