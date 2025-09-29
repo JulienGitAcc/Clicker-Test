@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://cao2geyaqj07i"]
+
+[ext_resource type="Script" uid="uid://digh176gqehm6" path="res://main.gd" id="1_ig7tw"]
+
+[sub_resource type="Animation" id="Animation_0xm2m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/VBoxContainer/ClickButton:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(240, 120)]
+}
+
+[sub_resource type="Animation" id="Animation_h2yge"]
+resource_name = "ShakeClick"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/VBoxContainer/ClickButton:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(240, 120), Vector2(260, 130), Vector2(230, 110), Vector2(240, 120)]
+}
+
+[sub_resource type="Animation" id="Animation_ig7tw"]
+resource_name = "Shake_Click"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/VBoxContainer/ClickButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(845, 480), Vector2(835, 468), Vector2(845, 476), Vector2(840, 476)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2yge"]
+_data = {
+&"RESET": SubResource("Animation_0xm2m"),
+&"ShakeClick": SubResource("Animation_h2yge"),
+&"Shake_Click": SubResource("Animation_ig7tw")
+}
+
+[node name="Main" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ig7tw")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ClickButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 120)
+layout_mode = 2
+text = "Clique !"
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(165, 80)
+layout_mode = 1
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 215.0
+offset_bottom = 130.0
+
+[node name="UpgradeButton1" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Skilled Fingers"
+
+[node name="UpgradeLabel1" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Lvl 0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h2yge")
+}
