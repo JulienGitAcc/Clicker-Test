@@ -14,6 +14,7 @@ var upgrade_1_shown: bool = false
 @onready var hitmarker_template = $HitMarker
 @onready var info_logo1 = $Info
 @onready var info_1 = $Info/Area2D
+@onready var info_label = $Info/RichTextLabel
 
 
 func _ready() -> void:
@@ -48,10 +49,12 @@ func _spawn_hitmarker():
 
 
 func _on_Info_1_entered() -> void:
-	print("entrée!")
+	info_label.visible = true
+	info_label.position = get_global_mouse_position()
+
 
 func _on_Info_1_exited() -> void:
-	print("sortie")
+	info_label.visible = false
 	
 
 func _on_UpgradeButton1_pressed() -> void:
