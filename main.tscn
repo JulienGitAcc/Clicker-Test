@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cao2geyaqj07i"]
+[gd_scene load_steps=9 format=3 uid="uid://cao2geyaqj07i"]
 
 [ext_resource type="Script" uid="uid://digh176gqehm6" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cgmv1a3pgrnw0" path="res://assets/hit marker.png" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://4uhb35uju3oq" path="res://assets/info.png" id="2_h2yge"]
 
 [sub_resource type="Animation" id="Animation_0xm2m"]
 length = 0.001
@@ -55,6 +56,9 @@ _data = {
 &"Shake_Click": SubResource("Animation_ig7tw")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2yge"]
+radius = 13.601471
+
 [node name="Main" type="Control"]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
@@ -63,6 +67,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_ig7tw")
 
 [node name="HitMarker" type="Sprite2D" parent="."]
@@ -114,3 +119,15 @@ text = "Lvl 0"
 libraries = {
 &"": SubResource("AnimationLibrary_h2yge")
 }
+
+[node name="Info" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(234, 50)
+texture = ExtResource("2_h2yge")
+
+[node name="Area2D" type="Area2D" parent="Info"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Info/Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_h2yge")
