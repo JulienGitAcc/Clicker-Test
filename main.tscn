@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cao2geyaqj07i"]
+[gd_scene load_steps=11 format=3 uid="uid://cao2geyaqj07i"]
 
 [ext_resource type="Script" uid="uid://digh176gqehm6" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cgmv1a3pgrnw0" path="res://assets/hit marker.png" id="2_0xm2m"]
@@ -58,6 +58,32 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2yge"]
 radius = 13.601471
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.770319, 0.45354646, 0.84838086, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.6473816, 0.1221839, 0.6435281, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+content_margin_left = 12.0
+content_margin_top = 7.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(1.92523e-07, 0.68813396, 0.67597014, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.25982517, 0.32115817, 0.77936417, 1)
+border_blend = true
 
 [node name="Main" type="Control"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -132,12 +158,24 @@ texture = ExtResource("2_h2yge")
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_h2yge")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Info"]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-text = "TESTTESTRTESTESTE
+[node name="InfoLabel" type="RichTextLabel" parent="Info"]
+offset_right = 220.0
+offset_bottom = 90.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+text = "Each level add 1 Finger
 
-fdksokdf
+1 Finger = 1 Click per Click"
+scroll_active = false
 
-FQSDF"
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1690.0
+offset_top = 1.0
+offset_right = 1917.0
+offset_bottom = 207.0
+
+[node name="Stat_click" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bvp3")
+text = "testestestes"

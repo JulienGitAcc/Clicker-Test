@@ -14,7 +14,8 @@ var upgrade_1_shown: bool = false
 @onready var hitmarker_template = $HitMarker
 @onready var info_logo1 = $Info
 @onready var info_1 = $Info/Area2D
-@onready var info_label = $Info/RichTextLabel
+@onready var info_label = $Info/InfoLabel
+@onready var stat_click_label = $VBoxContainer/Stat_click
 
 
 func _ready() -> void:
@@ -22,11 +23,14 @@ func _ready() -> void:
 	upgrade_button_1.pressed.connect(_on_UpgradeButton1_pressed)
 	info_1.mouse_entered.connect(_on_Info_1_entered)
 	info_1.mouse_exited.connect(_on_Info_1_exited)
-	_update_label()
+	_update_score_label()
 	_update_upgrade_1_level()
 	upgrade_button_1.visible = false
 	upgrade_label_1.visible = false
 	info_logo1.visible = false
+	info_label.visible = false
+	stat_click_label.visible = false
+
 
 
 func _process(_delta):
@@ -50,7 +54,7 @@ func _spawn_hitmarker():
 
 func _on_Info_1_entered() -> void:
 	info_label.visible = true
-	info_label.position = get_global_mouse_position()
+	info_label.position = get_global_mouse_position() - info_label.size
 
 
 func _on_Info_1_exited() -> void:
@@ -62,8 +66,13 @@ func _on_UpgradeButton1_pressed() -> void:
 		score -= upgrade_1_cost
 		upgrade_1_level += 1
 		upgrade_1_cost = int(10 * pow(1.5, upgrade_1_level))
-		_update_label()
+		_update_score_label()
 		_update_upgrade_1_level()
+		_update_stat_click()
+		
+	if upgrade_1_level > 0 and not stat_click_label.visible:
+		stat_click_label.visible = true
+
 
 
 func _on_ClickButton_pressed() -> void:
@@ -71,7 +80,7 @@ func _on_ClickButton_pressed() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("ShakeClick")
 	score += 1 + upgrade_1_level
-	_update_label()
+	_update_score_label()
 	if not upgrade_1_shown and score >= 10:
 		upgrade_1_shown = true
 		upgrade_button_1.visible = true
@@ -79,9 +88,12 @@ func _on_ClickButton_pressed() -> void:
 		info_logo1.visible = true
 
 
-func _update_label() -> void:
+func _update_score_label() -> void:
 	score_label.text = str(score)
 
 
 func _update_upgrade_1_level() -> void:
 	upgrade_label_1.text = "Level " + str(upgrade_1_level) + " (Next: " + str(int(upgrade_1_cost)) + ")"
+	
+func _update_stat_click():
+	stat_click_label.text = str(upgrade_1_level + 1) + " Clicks / Click"
