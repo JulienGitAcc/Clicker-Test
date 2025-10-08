@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://cao2geyaqj07i"]
 
-[ext_resource type="Script" uid="uid://digh176gqehm6" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://cgmv1a3pgrnw0" path="res://assets/hit marker.png" id="2_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://4uhb35uju3oq" path="res://assets/info.png" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://digh176gqehm6" path="res://main.gd" id="1_feb5d"]
+[ext_resource type="Texture2D" uid="uid://cgmv1a3pgrnw0" path="res://assets/hit marker.png" id="2_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://4uhb35uju3oq" path="res://assets/info.png" id="3_7jktm"]
 
 [sub_resource type="Animation" id="Animation_0xm2m"]
 length = 0.001
@@ -85,7 +85,7 @@ border_width_bottom = 10
 border_color = Color(0.25982517, 0.32115817, 0.77936417, 1)
 border_blend = true
 
-[node name="Main" type="Control"]
+[node name="Game" type="Control"]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
@@ -94,12 +94,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_ig7tw")
+script = ExtResource("1_feb5d")
 
 [node name="HitMarker" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("2_0xm2m")
+texture = ExtResource("2_fc0e3")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -122,7 +122,7 @@ layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="UpgradeContainer1" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(165, 80)
 layout_mode = 1
 offset_left = 50.0
@@ -130,14 +130,33 @@ offset_top = 50.0
 offset_right = 215.0
 offset_bottom = 130.0
 
-[node name="UpgradeButton1" type="Button" parent="HBoxContainer"]
+[node name="UpgradeButton1" type="Button" parent="UpgradeContainer1"]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Skilled Fingers"
 
-[node name="UpgradeLabel1" type="Label" parent="HBoxContainer"]
+[node name="UpgradeLabel1" type="Label" parent="UpgradeContainer1"]
+layout_mode = 2
+text = "Lvl 0"
+
+[node name="UpgradeContainer2" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(165, 80)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 150.0
+offset_right = 215.0
+offset_bottom = 230.0
+
+[node name="UpgradeButton2" type="Button" parent="UpgradeContainer2"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Broken Mouse"
+
+[node name="UpgradeLabel2" type="Label" parent="UpgradeContainer2"]
 layout_mode = 2
 text = "Lvl 0"
 
@@ -150,7 +169,7 @@ libraries = {
 texture_filter = 2
 texture_repeat = 2
 position = Vector2(234, 50)
-texture = ExtResource("2_h2yge")
+texture = ExtResource("3_7jktm")
 
 [node name="Area2D" type="Area2D" parent="Info"]
 
@@ -166,6 +185,30 @@ text = "Each level add 1 Finger
 
 1 Finger = 1 Click per Click"
 scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Info2" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(234, 150)
+texture = ExtResource("3_7jktm")
+
+[node name="Area2D" type="Area2D" parent="Info2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Info2/Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_h2yge")
+
+[node name="InfoLabel2" type="RichTextLabel" parent="Info2"]
+offset_right = 290.0
+offset_bottom = 125.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+text = "You broke your mouse !
+Now it clicks by itself !
+
+1 Broken Mouse = 1 Click / Second"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -175,6 +218,12 @@ offset_right = 1917.0
 offset_bottom = 207.0
 
 [node name="Stat_click" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bvp3")
+text = "testestestes"
+
+[node name="Stat_click2" type="RichTextLabel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_1bvp3")

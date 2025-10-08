@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6wiff052khl"]
+
+[ext_resource type="Script" uid="uid://burta7g4olfih" path="res://main_menu.gd" id="1_06t4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
+bg_color = Color(0.32941177, 0.6862745, 0.4509804, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_06t4h"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = -1020.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameName" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 41
+text = "CLICKER GAME TEST"
+
+[node name="NewGameButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+text = "New Game"
+
+[node name="ExitGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 630.0
+offset_right = 1060.0
+offset_bottom = 680.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_06t4h")
+text = "Quit Game"
