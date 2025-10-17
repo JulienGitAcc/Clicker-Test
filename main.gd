@@ -1,6 +1,10 @@
 extends Control
 
-var score: int = 0
+var score: int = 999
+var score_total: int = 999
+var money: int = 0
+var next_money_gain: float = 1000
+var money_level: int = 0
 var upgrade_1_level: int = 0
 var upgrade_1_cost: int = 10
 var upgrade_1_shown: bool = false
@@ -24,8 +28,15 @@ var time_accumulator = 0.0
 @onready var info_logo2 = $Info2
 @onready var info_2 = $Info2/Area2D
 @onready var info_label2 = $Info2/InfoLabel2
-@onready var stat_click_label = $VBoxContainer/Stat_click
-@onready var stat_click_label2 = $VBoxContainer/Stat_click2
+@onready var stat_button = $StatsGroup/StatButton
+@onready var stat_group = $StatsGroup
+@onready var stat_click_label = $StatsGroup/VBoxContainer/Stat_click
+@onready var stat_click_label2 = $StatsGroup/VBoxContainer/Stat_click2
+@onready var money_count = $MoneyCount
+@onready var skills_button = $SkillsGroup/SkillsButton
+@onready var skills_group = $SkillsGroup
+@onready var skill_stats_button = $SkillsGroup/VBoxContainer/SkillStatsButton
+
 
 
 func _ready() -> void:
@@ -36,6 +47,9 @@ func _ready() -> void:
 	info_1.mouse_exited.connect(_on_Info_1_exited)
 	info_2.mouse_entered.connect(_on_Info_2_entered)
 	info_2.mouse_exited.connect(_on_Info_2_exited)
+	stat_button.pressed.connect(_on_StatButton_pressed)
+	skills_button.pressed.connect(_on_SkillsButton_pressed)
+	skill_stats_button.pressed.connect(_onSkillStatsButton_pressed)
 	_update_score_label()
 	_update_upgrade_1_level()
 	upgrade_button_1.visible = false
@@ -48,15 +62,22 @@ func _ready() -> void:
 	info_label2.visible = false
 	stat_click_label.visible = false
 	stat_click_label2.visible = false
+	stat_button.visible = false
+	money_count.visible = false
+	skills_button.visible = false
 
 
 func _process(delta):
 	upgrade_button_1.disabled = score < upgrade_1_cost
 	upgrade_button_2.disabled = score < upgrade_2_cost
+	if is_instance_valid(skill_stats_button):
+		skill_stats_button.disabled = money < 1
 	time_accumulator += delta
 	if time_accumulator >= 1.0:
 		score += upgrade_2_level
+		score_total += upgrade_2_level
 		time_accumulator = 0.0
+		_check_score()
 		_update_score_label()
 
 
@@ -117,6 +138,7 @@ func _on_UpgradeButton2_pressed():
 	
 	if upgrade_2_level > 1 and not stat_click_label2.visible:
 		stat_click_label2.visible = true
+		
 
 
 func _on_ClickButton_pressed() -> void:
@@ -124,6 +146,8 @@ func _on_ClickButton_pressed() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("ShakeClick")
 	score += 1 + upgrade_1_level
+	score_total += 1 + upgrade_1_level
+	_check_score()
 	_update_score_label()
 	if not upgrade_1_shown and score >= 10:
 		upgrade_1_shown = true
@@ -135,6 +159,27 @@ func _on_ClickButton_pressed() -> void:
 		upgrade_button_2.visible = true
 		upgrade_label_2.visible = true
 		info_logo2.visible = true
+		
+
+func _on_StatButton_pressed():
+	var tween = create_tween()
+	if stat_group.position.x == 0:
+		tween.tween_property(stat_group, "position:x", -227, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		stat_button.text = str(">>>\nStats\n>>>")
+	else:
+		tween.tween_property(stat_group, "position:x", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		stat_button.text = str("<<<\nStats\n<<<")
+		
+
+func _on_SkillsButton_pressed():
+	var tween = create_tween()
+	if skills_group.position.x == 0:
+		tween.tween_property(skills_group, "position:x", -227, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		skills_button.text = str(">>>\nSkills\n>>>")
+	else:
+		tween.tween_property(skills_group, "position:x", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		skills_button.text = str("<<<\nSkills\n<<<")
+	
 
 
 func _update_score_label() -> void:
@@ -155,3 +200,17 @@ func _update_stat_click():
 	
 func _update_stat_click2():
 	stat_click_label2.text = str(upgrade_2_level) + " Clicks / Second"
+
+func _check_score():
+	if score_total >= 1000 and not money_count.visible:
+		money_count.visible = true
+		skills_button.visible = true
+		
+	while score_total >= next_money_gain:
+		money += 1
+		money_count.text = str(money) + " $"
+		next_money_gain *= 2
+
+func _onSkillStatsButton_pressed():
+	stat_button.visible = true
+	skill_stats_button.queue_free()

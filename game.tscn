@@ -210,21 +210,84 @@ Now it clicks by itself !
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="StatsGroup" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StatButton" type="Button" parent="StatsGroup"]
 layout_mode = 0
-offset_left = 1690.0
-offset_top = 1.0
-offset_right = 1917.0
-offset_bottom = 207.0
+offset_left = 1870.0
+offset_right = 1920.0
+offset_bottom = 100.0
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 4
+theme_override_constants/align_to_largest_stylebox = 0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 15
+text = "<<<
+Stats
+<<<"
 
-[node name="Stat_click" type="RichTextLabel" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsGroup"]
+layout_mode = 0
+offset_left = 1921.0
+offset_right = 2148.0
+offset_bottom = 206.0
+
+[node name="Stat_click" type="RichTextLabel" parent="StatsGroup/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_1bvp3")
 text = "testestestes"
 
-[node name="Stat_click2" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Stat_click2" type="RichTextLabel" parent="StatsGroup/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_1bvp3")
 text = "testestestes"
+
+[node name="SkillsGroup" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SkillsButton" type="Button" parent="SkillsGroup"]
+layout_mode = 0
+offset_left = 1870.0
+offset_top = 200.0
+offset_right = 1920.0
+offset_bottom = 300.0
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 4
+theme_override_constants/align_to_largest_stylebox = 0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 15
+text = "<<<
+Skills
+<<<"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SkillsGroup"]
+layout_mode = 0
+offset_left = 1950.0
+offset_top = 200.0
+offset_right = 2050.0
+offset_bottom = 406.0
+theme_override_constants/separation = 4
+
+[node name="SkillStatsButton" type="Button" parent="SkillsGroup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/line_spacing = 0
+text = "Stats"
+
+[node name="MoneyCount" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 1720.0
+offset_top = 150.0
+offset_right = 1920.0
+offset_bottom = 190.0
+theme_override_colors/default_color = Color(1, 0.84313726, 0, 1)
+theme_override_font_sizes/normal_font_size = 26
+text = "$$$"
+horizontal_alignment = 2
