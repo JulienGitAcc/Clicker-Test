@@ -17,7 +17,7 @@ var time_accumulator = 0.0
 
 @onready var click_button: Button = $CenterContainer/VBoxContainer/ClickButton
 @onready var score_label: Label = $CenterContainer/VBoxContainer/ScoreLabel
-@onready var upgrade_button_1: Button = $UpgradeContainer1/UpgradeButton1
+@onready var upgrade_button_1: TextureButton = $UpgradeContainer1/UpgradeButton1
 @onready var upgrade_label_1: Label = $UpgradeContainer1/UpgradeLabel1
 @onready var upgrade_button_2: Button = $UpgradeContainer2/UpgradeButton2
 @onready var upgrade_label_2: Label = $UpgradeContainer2/UpgradeLabel2
@@ -33,9 +33,10 @@ var time_accumulator = 0.0
 @onready var stat_click_label = $StatsGroup/VBoxContainer/Stat_click
 @onready var stat_click_label2 = $StatsGroup/VBoxContainer/Stat_click2
 @onready var money_count = $MoneyCount
-@onready var skills_button = $SkillsGroup/SkillsButton
-@onready var skills_group = $SkillsGroup
-@onready var skill_stats_button = $SkillsGroup/VBoxContainer/SkillStatsButton
+@onready var dlcs_button = $DLCsGroup/DLCsButton
+@onready var dlcs_group = $DLCsGroup
+@onready var dlc_stats_button = $DLCsGroup/VBoxContainer/DLCStatsButton
+@onready var dlc_test_button = $DLCsGroup/VBoxContainer/DLCTestButton
 
 
 
@@ -48,8 +49,9 @@ func _ready() -> void:
 	info_2.mouse_entered.connect(_on_Info_2_entered)
 	info_2.mouse_exited.connect(_on_Info_2_exited)
 	stat_button.pressed.connect(_on_StatButton_pressed)
-	skills_button.pressed.connect(_on_SkillsButton_pressed)
-	skill_stats_button.pressed.connect(_onSkillStatsButton_pressed)
+	dlcs_button.pressed.connect(_on_SkillsButton_pressed)
+	dlc_stats_button.pressed.connect(_onSkillStatsButton_pressed)
+	dlc_test_button.pressed.connect(_onDLCTestButton_pressed)
 	_update_score_label()
 	_update_upgrade_1_level()
 	upgrade_button_1.visible = false
@@ -64,14 +66,14 @@ func _ready() -> void:
 	stat_click_label2.visible = false
 	stat_button.visible = false
 	money_count.visible = false
-	skills_button.visible = false
+	dlcs_button.visible = false
 
 
 func _process(delta):
 	upgrade_button_1.disabled = score < upgrade_1_cost
 	upgrade_button_2.disabled = score < upgrade_2_cost
-	if is_instance_valid(skill_stats_button):
-		skill_stats_button.disabled = money < 1
+	if is_instance_valid(dlc_stats_button):
+		dlc_stats_button.disabled = money < 1
 	time_accumulator += delta
 	if time_accumulator >= 1.0:
 		score += upgrade_2_level
@@ -173,12 +175,12 @@ func _on_StatButton_pressed():
 
 func _on_SkillsButton_pressed():
 	var tween = create_tween()
-	if skills_group.position.x == 0:
-		tween.tween_property(skills_group, "position:x", -227, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		skills_button.text = str(">>>\nSkills\n>>>")
+	if dlcs_group.position.x == 0:
+		tween.tween_property(dlcs_group, "position:x", -227, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		dlcs_button.text = str(">>>\nDLCs\n>>>")
 	else:
-		tween.tween_property(skills_group, "position:x", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		skills_button.text = str("<<<\nSkills\n<<<")
+		tween.tween_property(dlcs_group, "position:x", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		dlcs_button.text = str("<<<\nDLCs\n<<<")
 	
 
 
@@ -204,7 +206,7 @@ func _update_stat_click2():
 func _check_score():
 	if score_total >= 1000 and not money_count.visible:
 		money_count.visible = true
-		skills_button.visible = true
+		dlcs_button.visible = true
 		
 	while score_total >= next_money_gain:
 		money += 1
@@ -213,4 +215,12 @@ func _check_score():
 
 func _onSkillStatsButton_pressed():
 	stat_button.visible = true
-	skill_stats_button.queue_free()
+	dlc_stats_button.queue_free()
+
+
+func _onDLCTestButton_pressed():
+	var game_window = preload("res://window.tscn")
+	
+	var window_instance = game_window.instantiate()
+	
+	add_child(window_instance)

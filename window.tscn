@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://131n4q0nxqh2"]
+
+[ext_resource type="Script" uid="uid://b7pe00atj7bry" path="res://GameWindow.gd" id="1_4vd1n"]
+[ext_resource type="Texture2D" uid="uid://dgkb5i5sviuup" path="res://assets/Ui/Styles/Classic/placeholder/placeholder_normal.png" id="2_ifklg"]
+[ext_resource type="Texture2D" uid="uid://vqv0mfy48pmd" path="res://assets/Ui/Styles/Classic/placeholder/placeholder_pressed.png" id="3_ygqcu"]
+[ext_resource type="Texture2D" uid="uid://clnku2gt12cxe" path="res://assets/Ui/Styles/Classic/placeholder/placeholder_hover.png" id="4_cv8km"]
+[ext_resource type="Texture2D" uid="uid://hlxyrg5ykd1y" path="res://assets/Ui/Styles/Classic/placeholder/placeholder_disabled.png" id="5_6usdr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlt83"]
+bg_color = Color(0.3403393, 0.34033936, 0.34033918, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg7ok"]
+bg_color = Color(0.18000486, 0.1800049, 0.18000478, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[node name="Window" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_4vd1n")
+
+[node name="GameWindow" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 500.0
+offset_right = 1500.0
+offset_bottom = 1000.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nlt83")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameWindow"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 480.0
+offset_bottom = 480.0
+
+[node name="GameContainer" type="Panel" parent="GameWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tg7ok")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameWindow/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameName" type="RichTextLabel" parent="GameWindow/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "nom du jeu"
+
+[node name="QuitButton" type="TextureButton" parent="GameWindow/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_ifklg")
+texture_pressed = ExtResource("3_ygqcu")
+texture_hover = ExtResource("4_cv8km")
+texture_disabled = ExtResource("5_6usdr")
