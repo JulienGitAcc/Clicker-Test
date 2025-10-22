@@ -119,6 +119,7 @@ layout_mode = 2
 [node name="ClickButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(240, 120)
 layout_mode = 2
+focus_mode = 0
 text = "Clique !"
 
 [node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer"]
@@ -137,6 +138,7 @@ offset_bottom = 114.0
 [node name="UpgradeButton1" type="TextureButton" parent="UpgradeContainer1"]
 custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
+focus_mode = 0
 texture_normal = ExtResource("3_ryrav")
 texture_pressed = ExtResource("4_eow3j")
 texture_hover = ExtResource("5_j5wjh")
@@ -159,6 +161,7 @@ custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+focus_mode = 0
 text = "Broken Mouse"
 
 [node name="UpgradeLabel2" type="Label" parent="UpgradeContainer2"]
@@ -225,6 +228,7 @@ layout_mode = 0
 offset_left = 1870.0
 offset_right = 1920.0
 offset_bottom = 100.0
+focus_mode = 0
 theme_override_constants/outline_size = 0
 theme_override_constants/h_separation = 4
 theme_override_constants/align_to_largest_stylebox = 0
@@ -263,6 +267,7 @@ offset_left = 1870.0
 offset_top = 200.0
 offset_right = 1920.0
 offset_bottom = 300.0
+focus_mode = 0
 theme_override_constants/outline_size = 0
 theme_override_constants/h_separation = 4
 theme_override_constants/align_to_largest_stylebox = 0
@@ -282,6 +287,7 @@ theme_override_constants/separation = 4
 
 [node name="DLCStatsButton" type="Button" parent="DLCsGroup/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 theme_override_constants/h_separation = 4
 theme_override_constants/line_spacing = 0
 text = "Stats"
@@ -289,6 +295,7 @@ text = "Stats"
 [node name="DLCTestButton" type="Button" parent="DLCsGroup/VBoxContainer"]
 custom_minimum_size = Vector2(100, 31)
 layout_mode = 2
+focus_mode = 0
 text = "Test"
 
 [node name="MoneyCount" type="RichTextLabel" parent="."]

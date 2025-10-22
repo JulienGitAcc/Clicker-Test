@@ -2,7 +2,6 @@ extends Control
 
 var score: int = 999
 var score_total: int = 999
-var money: int = 0
 var next_money_gain: float = 1000
 var money_level: int = 0
 var upgrade_1_level: int = 0
@@ -12,6 +11,7 @@ var upgrade_2_level: int = 0
 var upgrade_2_cost: int = 100
 var upgrade_2_shown: bool = false
 var time_accumulator = 0.0
+
 
 
 
@@ -73,7 +73,7 @@ func _process(delta):
 	upgrade_button_1.disabled = score < upgrade_1_cost
 	upgrade_button_2.disabled = score < upgrade_2_cost
 	if is_instance_valid(dlc_stats_button):
-		dlc_stats_button.disabled = money < 1
+		dlc_stats_button.disabled = AllScores.money < 1
 	time_accumulator += delta
 	if time_accumulator >= 1.0:
 		score += upgrade_2_level
@@ -204,13 +204,14 @@ func _update_stat_click2():
 	stat_click_label2.text = str(upgrade_2_level) + " Clicks / Second"
 
 func _check_score():
+	money_count.text = str(AllScores.money) + " $"
+	
 	if score_total >= 1000 and not money_count.visible:
 		money_count.visible = true
 		dlcs_button.visible = true
 		
 	while score_total >= next_money_gain:
-		money += 1
-		money_count.text = str(money) + " $"
+		AllScores.money += 1
 		next_money_gain *= 2
 
 func _onSkillStatsButton_pressed():
@@ -220,7 +221,7 @@ func _onSkillStatsButton_pressed():
 
 func _onDLCTestButton_pressed():
 	var game_window = preload("res://window.tscn")
-	
 	var window_instance = game_window.instantiate()
-	
+	window_instance.game_scene = preload("res://dome_guardian.tscn")
 	add_child(window_instance)
+	

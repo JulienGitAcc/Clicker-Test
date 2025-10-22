@@ -29,6 +29,7 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 
 [node name="Window" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,6 +58,9 @@ offset_bottom = 480.0
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_tg7ok")
+
+[node name="SubViewport" type="SubViewport" parent="GameWindow/VBoxContainer/GameContainer"]
+size = Vector2i(460, 392)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameWindow/VBoxContainer"]
 layout_mode = 2

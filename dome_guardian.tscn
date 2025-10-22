@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4lbbgo5b6bfa"]
+
+[ext_resource type="Texture2D" uid="uid://olh3tm6xo6x2" path="res://assets/MiniGames/DomeGuardian/sprite_dg_character.png" id="1_6bg2v"]
+[ext_resource type="Script" uid="uid://n6tlmo6unmub" path="res://dome_guardian.gd" id="1_84y3q"]
+[ext_resource type="PackedScene" uid="uid://cu4sqidqr6b2q" path="res://block.tscn" id="2_oxrwk"]
+[ext_resource type="Script" uid="uid://drp1uui1krscg" path="res://miner.gd" id="3_ooabc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84y3q"]
+bg_color = Color(0.6, 0.6, 0.1882353, 0.12156863)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxrwk"]
+size = Vector2(31, 27)
+
+[node name="DomeGuardian" type="Node2D"]
+script = ExtResource("1_84y3q")
+block_scene = ExtResource("2_oxrwk")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(460, 390)
+offset_left = 1.0
+offset_right = 461.0
+offset_bottom = 390.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_84y3q")
+
+[node name="Blocks" type="Node2D" parent="."]
+position = Vector2(-259, 0)
+
+[node name="Miner" type="CharacterBody2D" parent="."]
+position = Vector2(231, 158)
+script = ExtResource("3_ooabc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Miner"]
+position = Vector2(1, 1)
+texture = ExtResource("1_6bg2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Miner"]
+shape = SubResource("RectangleShape2D_oxrwk")
